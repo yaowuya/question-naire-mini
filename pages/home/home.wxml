@@ -19,3 +19,4 @@
     </van-row>
   </view>
 </view>
+ <van-notify id="van-notify" />

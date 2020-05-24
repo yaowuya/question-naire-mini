@@ -1,4 +1,7 @@
 // pages/home/home.js
+import Notify from '../../miniprogram_npm/@vant/weapp/notify/notify';
+const http = require('../../utils/http.js')
+const app = getApp()
 Page({
 
   /**
@@ -49,29 +52,51 @@ Page({
   onLoad: function(options) {
     this.getRoleInfo()
   },
-  getRoleInfo: function() {
+  getRoleInfo: async function() {
     wx.showLoading({
       title: '加载中',
     })
     let self = this
-    wx.request({
-      url: 'http://localhost:3000/mini/api/getAllRole',
-      method: 'GET',
-      data: {},
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success(res) {
-        wx.hideLoading()
-        self.setData({
+    try {
+      const res = await app.$http.get('getAllRole', {})
+      if (res.result) {
+        this.setData({
           roleList: res.data,
           role: res.data[0].name
         })
-      },
-      fail(res) {
-        wx.hideLoading()
+      } else {
+        Notify(res.message)
       }
-    })
+      wx.hideLoading()
+    } catch (e) {
+      wx.hideLoading()
+      Notify(JSON.stringify(e))
+    }
+
+    // wx.request({
+    //   url: 'http://localhost:3000/mini/api/getAllRole',
+    //   method: 'GET',
+    //   data: {},
+    //   header: {
+    //     'content-type': 'application/json' // 默认值
+    //   },
+    //   success(res) {
+    //     wx.hideLoading()
+    //     if (res.data.result) {
+    //       self.setData({
+    //         roleList: res.data.data,
+    //         role: res.data.data[0].name
+    //       })
+    //     } else {
+    //       Notify(res.data.message)
+    //     }
+
+    //   },
+    //   fail(res) {
+    //     wx.hideLoading()
+    //     Notify(JSON.stringify(res))
+    //   }
+    // })
   },
   myBlur(event) {
     // console.log(event)
