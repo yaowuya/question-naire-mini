@@ -1,0 +1,21 @@
+<view class="container home">
+  <view class="card">
+    <van-row class="radio-group-row">
+      <van-radio-group value="{{ role }}" bind:change="onChange" class="role-radio-group">
+        <van-radio wx:for="{{roleList}}" wx:key="index" name="{{item.name}}" checked-color="#07c160 " class="role-radio ">{{item.chinese}}</van-radio>
+      </van-radio-group>
+    </van-row>
+    <van-divider />
+    <van-cell-group title="医生信息 " wx:if="{{showDoctor}}">
+      <van-field value="{{person.doctorName}}" required label="名称 " placeholder="请输入名称 " data-info="person.doctorName" data-set="message.doctorName" bind:blur="myBlur" error-message="{{message.doctorName}}"/>
+      <van-field value="{{person.doctorNumber}}" required type="number" label="编号 " placeholder="请输入编号 " data-info="person.doctorNumber" data-set="message.doctorNumber" bind:blur="myBlur" error-message="{{message.doctorNumber}}" />
+    </van-cell-group>
+    <van-cell-group title="调查对象信息 ">
+      <van-field value="{{person.patientName}}" required label="名称 " placeholder="请输入名称 " data-info="person.patientName" data-set="message.patientName" bind:blur="myBlur" error-message="{{message.patientName}}" />
+      <van-field value="{{person.patientNumber}}" required type="number" label="编号 " placeholder="请输入编号 " data-info="person.patientNumber" data-set="message.patientNumber" bind:blur="myBlur" error-message="{{message.patientNumber}}" />
+    </van-cell-group>
+    <van-row class="center home-button ">
+      <van-button type="primary " class="w-100 " bindtap="submitPerson">下一步</van-button>
+    </van-row>
+  </view>
+</view>

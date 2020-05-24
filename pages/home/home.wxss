@@ -1,0 +1,31 @@
+/* pages/home/home.wxss */
+
+.home {
+  display: flex;
+  justify-content: center;
+  background-color: #f6f6f6;
+}
+
+.home .card {
+  padding: 3vh 0;
+  background-color: white;
+}
+
+.radio-group-row {
+  display: flex;
+  justify-content: center;
+}
+
+.role-radio-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.role-radio {
+  margin-right: 70rpx;
+}
+
+.home-button {
+  padding-top: 40rpx;
+}
