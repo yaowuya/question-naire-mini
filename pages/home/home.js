@@ -14,7 +14,8 @@ Page({
       doctorName: "",
       doctorNumber: "",
       patientName: "",
-      patientNumber: ""
+      patientNumber: "",
+      patientTime: "zero"
     },
     message: {
       doctorName: "",
@@ -25,10 +26,11 @@ Page({
     showDoctor: true
   },
   onChange(event) {
+    // console.log(event)
     this.setData({
-      role: event.detail
+      role: event.detail.name
     });
-    if (event.detail === 'doctor') {
+    if (event.detail.name === 'doctor') {
       this.setData({
         showDoctor: true
       });
@@ -45,20 +47,30 @@ Page({
         [person]: ''
       })
     }
+    this.setData({
+      'person.patientTime': 'zero',
+    })
+  },
+  onChangeTime(event) {
+    // console.log(event)
+    this.setData({
+      'person.patientTime': event.detail,
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     this.getRoleInfo()
   },
-  getRoleInfo: async function () {
+  getRoleInfo: async function() {
     wx.showLoading({
       title: '加载中',
     })
     try {
       const res = await app.$http.get('getAllRole', {})
       if (res.result) {
+        wx.hideLoading()
         this.setData({
           roleList: res.data,
           role: res.data[0].name
@@ -66,7 +78,6 @@ Page({
       } else {
         Notify(res.message)
       }
-      wx.hideLoading()
     } catch (e) {
       wx.hideLoading()
       Notify(JSON.stringify(e))
@@ -88,63 +99,96 @@ Page({
     })
 
   },
-  submitPerson() {
+  async submitPerson() {
     for (let p of Object.keys(this.data.person)) {
-      if (this.data.person[p].trim().length === 0) {
-        let message = 'message.' + p
-        this.setData({
-          [message]: '不能为空'
-        })
-        return
+      if (this.data.role === 'doctor') {
+        if (this.data.person[p].trim().length === 0) {
+          let message = 'message.' + p
+          this.setData({
+            [message]: '不能为空'
+          })
+          return
+        }
+      } else {
+        if (p.indexOf('patient') >= 0) {
+          if (this.data.person[p].trim().length === 0) {
+            let message = 'message.' + p
+            this.setData({
+              [message]: '不能为空'
+            })
+            return
+          }
+        }
       }
     }
     console.log(this.data.person)
+    wx.showLoading({
+      title: '加载中',
+    })
+    try {
+      const res = await app.$http.post('addPerson', {
+        person:this.data.person,
+        role:this.data.role
+      })
+      wx.hideLoading()
+      if (res.result) {
+        let personId=res.data.person
+        wx.navigateTo({
+          url: `../question/question?personId=${personId}`
+        });
+      } else {
+        Notify(res.message)
+      }
+    } catch (e) {
+      wx.hideLoading()
+      Notify(JSON.stringify(e))
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

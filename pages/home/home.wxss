@@ -11,19 +11,24 @@
   background-color: white;
 }
 
+.van-hairline--top-bottom::after {
+  border: none !important;
+}
+
 .radio-group-row {
   display: flex;
   justify-content: center;
 }
 
-.role-radio-group {
+.time-radio-group {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  padding: 15rpx 0;
 }
 
-.role-radio {
-  margin-right: 70rpx;
+.time-radio-group van-radio {
+  margin-right: 25rpx;
 }
 
 .home-button {

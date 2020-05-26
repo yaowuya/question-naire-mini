@@ -1,12 +1,13 @@
 {
-  "pages":[
-    "pages/home/home"
+  "pages": [
+    "pages/home/home",
+    "pages/question/question"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "调查问卷",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
   "usingComponents": {
     "van-button": "@vant/weapp/button/index",
@@ -18,7 +19,9 @@
     "van-cell": "@vant/weapp/cell/index",
     "van-cell-group": "@vant/weapp/cell-group/index",
     "van-divider": "@vant/weapp/divider/index",
-    "van-notify": "@vant/weapp/notify/index"
+    "van-notify": "@vant/weapp/notify/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
