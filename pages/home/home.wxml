@@ -14,6 +14,8 @@
       <van-field value="{{person.patientName}}" required label="名称 " placeholder="请输入名称 " data-info="person.patientName" data-set="message.patientName" bind:blur="myBlur" error-message="{{message.patientName}}" />
       <van-field value="{{person.patientNumber}}" required type="number" label="编号 " placeholder="请输入编号 " data-info="person.patientNumber" data-set="message.patientNumber" bind:blur="myBlur" error-message="{{message.patientNumber}}" />
     </van-cell-group>
+    <van-cell-group title="调查对象信息 ">
+    </van-cell-group>
     <van-row class="center home-button ">
       <van-button type="primary " class="w-100 " bindtap="submitPerson">下一步</van-button>
     </van-row>

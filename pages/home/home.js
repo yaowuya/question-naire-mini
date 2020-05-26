@@ -56,7 +56,6 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    let self = this
     try {
       const res = await app.$http.get('getAllRole', {})
       if (res.result) {
@@ -72,31 +71,6 @@ Page({
       wx.hideLoading()
       Notify(JSON.stringify(e))
     }
-
-    // wx.request({
-    //   url: 'http://localhost:3000/mini/api/getAllRole',
-    //   method: 'GET',
-    //   data: {},
-    //   header: {
-    //     'content-type': 'application/json' // 默认值
-    //   },
-    //   success(res) {
-    //     wx.hideLoading()
-    //     if (res.data.result) {
-    //       self.setData({
-    //         roleList: res.data.data,
-    //         role: res.data.data[0].name
-    //       })
-    //     } else {
-    //       Notify(res.data.message)
-    //     }
-
-    //   },
-    //   fail(res) {
-    //     wx.hideLoading()
-    //     Notify(JSON.stringify(res))
-    //   }
-    // })
   },
   myBlur(event) {
     // console.log(event)
