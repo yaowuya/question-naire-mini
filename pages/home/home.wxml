@@ -15,10 +15,7 @@
     <van-cell-group title="调查时间" wx:if="{{!showDoctor}}">
       <van-row class='radio-group-row'>
         <van-radio-group value="{{person.patientTime}}" bind:change="onChangeTime" class="time-radio-group">
-          <van-radio name="zero" checked-color="#07c160">初诊</van-radio>
-          <van-radio name="oneWeek" checked-color="#07c160">1周</van-radio>
-          <van-radio name="oneMonth" checked-color="#07c160">1月</van-radio>
-          <van-radio name="threeMonth" checked-color="#07c160">3月</van-radio>
+          <van-radio wx:for="{{qtList}}" wx:key="index" name="{{item.name}}" checked-color="#07c160">{{item.chinese}}</van-radio>
         </van-radio-group>
       </van-row>
     </van-cell-group>

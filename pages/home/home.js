@@ -1,6 +1,5 @@
 // pages/home/home.js
 import Notify from '../../miniprogram_npm/@vant/weapp/notify/notify';
-const http = require('../../utils/http.js')
 const app = getApp()
 Page({
 
@@ -10,6 +9,8 @@ Page({
   data: {
     role: '',
     roleList: [],
+    qtList:[],
+    questionType:'',
     person: {
       doctorName: "",
       doctorNumber: "",
@@ -48,7 +49,7 @@ Page({
       })
     }
     this.setData({
-      'person.patientTime': 'zero',
+      'person.patientTime': this.data.questionType,
     })
   },
   onChangeTime(event) {
@@ -70,14 +71,16 @@ Page({
     try {
       const res = await app.$http.get('getAllRole', {})
       if (res.result) {
-        wx.hideLoading()
         this.setData({
-          roleList: res.data,
-          role: res.data[0].name
+          roleList: res.data.roleList,
+          role: res.data.roleList[0].name,
+          qtList:res.data.qtList,
+          questionType: res.data.qtList[0].name,
         })
       } else {
         Notify(res.message)
       }
+      wx.hideLoading()
     } catch (e) {
       wx.hideLoading()
       Notify(JSON.stringify(e))
@@ -121,7 +124,7 @@ Page({
         }
       }
     }
-    console.log(this.data.person)
+    // console.log(this.data.person)
     wx.showLoading({
       title: '加载中',
     })
@@ -132,9 +135,10 @@ Page({
       })
       wx.hideLoading()
       if (res.result) {
-        let personId=res.data.person
+        const personId=res.data.person
+        const questionType=res.data.questionType
         wx.navigateTo({
-          url: `../question/question?personId=${personId}`
+          url: `../question/question?personId=${personId}&questionType=${questionType}`
         });
       } else {
         Notify(res.message)
