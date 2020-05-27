@@ -1,1 +1,32 @@
 /* pages/question/question.wxss */
+.question-name {
+  color: #409EFF;
+  font-weight: bold;
+  font-size: 36rpx;
+}
+.title-row{
+  margin-top: 60rpx;
+}
+/* .title-card {
+  margin-top: 20rpx;
+} */
+
+.title-header {
+  color: black;
+  font-weight: 600;
+  font-size: 31rpx;
+}
+
+.title-body {
+  margin-top: 20rpx;
+  border: 1rpx solid #ebedf0;
+  border-radius: 6rpx;
+}
+
+.title-radio {
+  padding: 20rpx;
+}
+
+.title-body .van-divider {
+  margin: 0 !important;
+}

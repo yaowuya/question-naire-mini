@@ -1,3 +1,25 @@
 <!--pages/question/question.wxml-->
-<text>pages/question/question.wxml</text>
+<view class="container">
+	<van-row>
+		<van-col span="24">
+			<view class="center question-name">{{question.name}}</view>
+		</van-col>
+	</van-row>
+	<van-row class="title-row">
+		<view class="title-card">
+			<view class="title-header">1.您的性别</view>
+			<view class="title-body">
+				<van-radio-group value="1">
+					<view class="title-radio">
+						<van-radio name="1">单选框 1</van-radio>
+					</view>
+					<van-divider />
+					<view class="title-radio">
+						<van-radio name="2">单选框 2</van-radio>
+					</view>
+				</van-radio-group>
+			</view>
+		</view>
+	</van-row>
+</view>
 <van-notify id="van-notify" />

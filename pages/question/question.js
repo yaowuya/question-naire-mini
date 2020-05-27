@@ -2,13 +2,14 @@ import Notify from '../../miniprogram_npm/@vant/weapp/notify/notify';
 const app = getApp()
 // pages/question/question.js
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
     personId: '',
-    questionType: ''
+    questionType: 'doctor-zero',
+    question:{},
+    titleList:[]
   },
 
   /**
@@ -16,10 +17,10 @@ Page({
    */
   onLoad: function (options) {
     // console.log(options)
-    this.setData({
-      personId: options.personId,
-      questionType: options.questionType
-    })
+    // this.setData({
+    //   personId: options.personId,
+    //   questionType: options.questionType
+    // })
     this.getQuestionInfo()
   },
   getQuestionInfo: async function () {
@@ -32,6 +33,10 @@ Page({
       })
       if (res.result) {
         console.log(res);
+        this.setData({
+          question:res.data.question[0],
+          titleList:res.data.titleList
+        })
       } else {
         Notify(res.message)
       }
