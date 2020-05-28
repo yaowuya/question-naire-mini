@@ -20,6 +20,30 @@
 				</van-radio-group>
 			</view>
 		</view>
+		<view class="title-card">
+			<view class="title-header">2.您的性别</view>
+			<view class="title-body">
+				<van-checkbox-group value="">
+					<view class="title-radio">
+						<van-checkbox shape="square" name="a">复选框 a</van-checkbox>
+					</view>
+					<van-divider />
+					<view class="title-radio">
+						<van-checkbox shape="square" name="b">复选框 b</van-checkbox>
+					</view>
+					<van-divider />
+					<view class="title-radio">
+						<van-checkbox shape="square" name="c">复选框 c</van-checkbox>
+					</view>
+				</van-checkbox-group>
+			</view>
+		</view>
+		<view class="title-card">
+			<view class="title-header">3.您的性别</view>
+			<view class="title-body">
+				<van-field value="{{  }}" type="textarea" placeholder="请输入内容" autosize="{minHeight: 50}" />
+			</view>
+		</view>
 	</van-row>
 </view>
 <van-notify id="van-notify" />

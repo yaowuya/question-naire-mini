@@ -5,11 +5,11 @@
   font-size: 36rpx;
 }
 .title-row{
-  margin-top: 60rpx;
+  margin-top: 70rpx;
 }
-/* .title-card {
-  margin-top: 20rpx;
-} */
+.title-card {
+  margin-bottom: 30rpx;
+}
 
 .title-header {
   color: black;
@@ -21,6 +21,7 @@
   margin-top: 20rpx;
   border: 1rpx solid #ebedf0;
   border-radius: 6rpx;
+  padding: 10rpx;
 }
 
 .title-radio {

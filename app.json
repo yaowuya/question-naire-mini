@@ -21,7 +21,9 @@
     "van-divider": "@vant/weapp/divider/index",
     "van-notify": "@vant/weapp/notify/index",
     "van-tab": "@vant/weapp/tab/index",
-    "van-tabs": "@vant/weapp/tabs/index"
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-checkbox": "@vant/weapp/checkbox/index",
+    "van-checkbox-group": "@vant/weapp/checkbox-group/index"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
