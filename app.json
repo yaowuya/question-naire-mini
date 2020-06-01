@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/question/question",
-    "pages/home/home"
+    "pages/home/home",
+    "pages/question/question"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -23,7 +23,8 @@
     "van-tab": "@vant/weapp/tab/index",
     "van-tabs": "@vant/weapp/tabs/index",
     "van-checkbox": "@vant/weapp/checkbox/index",
-    "van-checkbox-group": "@vant/weapp/checkbox-group/index"
+    "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+    "van-image": "@vant/weapp/image/index"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

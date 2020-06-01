@@ -1,49 +1,53 @@
 <!--pages/question/question.wxml-->
 <view class="container">
-	<van-row>
+	<van-row class="question-header">
 		<van-col span="24">
 			<view class="center question-name">{{question.name}}</view>
 		</van-col>
 	</van-row>
-	<van-row class="title-row">
-		<view class="title-card">
-			<view class="title-header">1.您的性别</view>
+	<van-row wx:for="{{titleList}}" wx:key="index">
+		<view wx:if="{{item.topicType==='single'}}" class="title-card">
+			<view class="title-header">{{item.order+'.'+item.name}}</view>
 			<view class="title-body">
-				<van-radio-group value="1">
-					<view class="title-radio">
-						<van-radio name="1">单选框 1</van-radio>
-					</view>
-					<van-divider />
-					<view class="title-radio">
-						<van-radio name="2">单选框 2</van-radio>
+				<van-radio-group value="{{item.content}}" bind:change="changeSingle">
+					<view wx:for="{{item.option}}" wx:for-index="idx" wx:for-item="optionItem" wx:key="idx">
+						<view class="title-radio">
+							<van-radio data-index="{{index}}" data-optionid="{{optionItem._id}}" name="{{optionItem._id}}" bindtap="clickRadio">
+								{{optionItem.name+"."+optionItem.content}}
+							</van-radio>
+						</view>
+						<van-divider wx:if="{{idx<item.option.length-1}}" />
 					</view>
 				</van-radio-group>
 			</view>
 		</view>
-		<view class="title-card">
-			<view class="title-header">2.您的性别</view>
+		<view wx:if="{{item.topicType==='multiple'}}" class="title-card">
+			<view class="title-header">{{item.order+'.'+item.name}}</view>
+			<view wx:if="{{item.name==='神经分布'}}" class="center">
+				<van-image fit="contain" width="100" height="100" src="{{picture}}" />
+			</view>
 			<view class="title-body">
-				<van-checkbox-group value="">
-					<view class="title-radio">
-						<van-checkbox shape="square" name="a">复选框 a</van-checkbox>
-					</view>
-					<van-divider />
-					<view class="title-radio">
-						<van-checkbox shape="square" name="b">复选框 b</van-checkbox>
-					</view>
-					<van-divider />
-					<view class="title-radio">
-						<van-checkbox shape="square" name="c">复选框 c</van-checkbox>
+				<van-checkbox-group data-index="{{index}}" value="{{item.content}}" bind:change="changeCheckbox">
+					<view wx:for="{{item.option}}" wx:for-index="idx" wx:for-item="optionItem" wx:key="idx">
+						<view class="title-radio">
+							<van-checkbox shape="square" name="{{optionItem._id}}" class="checkboxes-{{ idx }}" data-idx="{{idx}}" bindtap="clickCheckbox" catch:tap="noop">
+								{{optionItem.name+"."+optionItem.content}}
+							</van-checkbox>
+						</view>
+						<van-divider wx:if="{{idx<item.option.length-1}}" />
 					</view>
 				</van-checkbox-group>
 			</view>
 		</view>
-		<view class="title-card">
-			<view class="title-header">3.您的性别</view>
+		<view wx:if="{{item.topicType==='input'}}" class="title-card">
+			<view class="title-header">{{item.order+'.'+item.name}}</view>
 			<view class="title-body">
-				<van-field value="{{  }}" type="textarea" placeholder="请输入内容" autosize="{minHeight: 50}" />
+				<van-field value="{{item.content}}" type="textarea" placeholder="请输入..." autosize="{minHeight: 70}" data-index="{{index}}" bind:blur="textBlur" />
 			</view>
 		</view>
+	</van-row>
+	<van-row wx:if="{{showBtn}}" class="btn-footer center">
+		<van-button size="normal" type="primary" bindtap="submitTitle">{{btnText}}</van-button>
 	</van-row>
 </view>
 <van-notify id="van-notify" />
