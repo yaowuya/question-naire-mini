@@ -14,7 +14,8 @@ Page({
     showBtn: false,
     picture: app.globalData.host + 'images/shenjing.png',
     btnText: '下一步',
-    questionId: ''
+    questionId: '',
+    success: false
   },
 
   /**
@@ -25,7 +26,8 @@ Page({
     this.setData({
       personId: options.personId,
       questionType: options.questionType,
-      role: options.role
+      role: options.role,
+      success: false
     })
     if (options.role === 'doctor') {
       this.setData({
@@ -122,6 +124,14 @@ Page({
     // console.log(event)
   },
   async submitTitle() {
+    if (!this.validate()) {
+      return
+    }
+    if (['doctor2', 'patient3', 'patient4'].includes(this.data.questionId)) {
+      this.setData({
+        success: true
+      })
+    }
     if (this.data.role === 'doctor') {
       this.setData({
         btnText: '提 交',
@@ -154,11 +164,11 @@ Page({
         titleList: this.data.titleList,
         personId: this.data.personId,
         questionId: this.data.question._id,
-        questionType:this.data.questionType
+        questionType: this.data.questionType
       })
       if (res.result) {
         Notify({ type: 'success', message: '提交成功' });
-        if(this.data.btnText==='提 交'){
+        if (this.data.success) {
           wx.navigateTo({
             url: `../success/success`
           });
@@ -171,6 +181,24 @@ Page({
       wx.hideLoading()
       Notify(JSON.stringify(e))
     }
+  },
+  validate() {
+    let flag = false
+    let order = 1
+    this.data.titleList.forEach(title => {
+      if (title.content == '' || title.content == []) {
+        flag = true
+        order = title.order
+        return
+      }
+    })
+    if (flag) {
+      Notify(`第${order}题为空,请选择！`)
+      return false
+    } else {
+      return true
+    }
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
