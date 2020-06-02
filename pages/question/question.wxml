@@ -1,4 +1,7 @@
 <!--pages/question/question.wxml-->
+<van-sticky>
+	<van-notify id="van-notify" />
+</van-sticky>
 <view class="container">
 	<van-row class="question-header">
 		<van-col span="24">
@@ -50,4 +53,3 @@
 		<van-button size="normal" type="primary" bindtap="submitTitle">{{btnText}}</van-button>
 	</van-row>
 </view>
-<van-notify id="van-notify" />

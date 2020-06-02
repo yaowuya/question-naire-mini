@@ -158,6 +158,11 @@ Page({
       })
       if (res.result) {
         Notify({ type: 'success', message: '提交成功' });
+        if(this.data.btnText==='提 交'){
+          wx.navigateTo({
+            url: `../success/success`
+          });
+        }
       } else {
         Notify(res.message)
       }

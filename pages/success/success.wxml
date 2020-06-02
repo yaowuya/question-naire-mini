@@ -1,0 +1,5 @@
+<view class="container">
+  <view class="icon-body">
+    <van-icon name="passed" color="#07c160" size="400rpx"/>
+  </view>
+</view>
